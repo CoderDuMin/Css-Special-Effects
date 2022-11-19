@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>科技感时间仪</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <a class="switcher" href="#"></a>
+  <div class="screen glitch">
+    <div class="clock is-off"><span class="time" data-time=""></span></div>
+    <div class="figure"></div>
+    <div class="figure-mask"></div>
+  </div>
+
+  <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+
+      function second_passed() {
+        $('.clock').removeClass('is-off');
+      }
+      setTimeout(second_passed, 2000)
+
+      $('.switcher').on('click', function (e) {
+        e.preventDefault();
+        $('.screen').toggleClass('glitch');
+      });
+
+
+      var newDate = new Date();
+      newDate.setDate(newDate.getDate());
+
+      setInterval(function () {
+
+        var hours = new Date().getHours();
+        var seconds = new Date().getSeconds();
+        var minutes = new Date().getMinutes();
+
+        var realTime = (hours < 10 ? '0' : '') + hours + ' : ' + (minutes < 10 ? '0' : '') + minutes + ' : ' + (seconds < 10 ? '0' : '') + seconds
+
+        $('.time').html(realTime);
+        $('.time').attr('data-time', realTime);
+
+      }, 1000);
+
+    });
+  </script>
+
+</body>
+
+</html>
